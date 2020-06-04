@@ -23,12 +23,8 @@ var getWizardElement = function (firstName, lastName, coat, eyes) {
 };
 
 // создание массива объектов
-var getWizardsList = function (amount) {
-  var wizardsList = [];
-  for (var i = 0; i < amount; i++) {
-    wizardsList.push(getWizardElement(WIZARD_FIRSTNAME, WIZARD_LASTNAME, WIZARD_COAT, WIZARD_EYES));
-  }
-
+var getWizardsList = function () {
+  var wizardsList = new Array(4).fill(getWizardElement(WIZARD_FIRSTNAME, WIZARD_LASTNAME, WIZARD_COAT, WIZARD_EYES));
   return wizardsList;
 };
 
@@ -50,11 +46,14 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < WIZARDS; i++) {
-  fragment.appendChild(renderWizard(getWizardsList(WIZARDS)[i]));
-}
+var renderWizardsList = function () {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < WIZARDS; i++) {
+    fragment.appendChild(renderWizard(getWizardsList(WIZARDS)[i]));
+  }
+  similarListElement.appendChild(fragment);
+};
 
-similarListElement.appendChild(fragment);
+renderWizardsList();
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
