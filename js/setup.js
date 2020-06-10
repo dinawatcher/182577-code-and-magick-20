@@ -28,15 +28,9 @@ var getWizardsList = function () {
   return wizardsList;
 };
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-
-var similarListElement = document.querySelector('.setup-similar-list');
-
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
 // создание DOM-элементов на основе сгенерированных данных
 var renderWizard = function (wizard) {
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
@@ -51,9 +45,15 @@ var renderWizardsList = function () {
   for (var i = 0; i < WIZARDS; i++) {
     fragment.appendChild(renderWizard(getWizardsList(WIZARDS)[i]));
   }
+  var similarListElement = document.querySelector('.setup-similar-list');
   similarListElement.appendChild(fragment);
 };
 
-renderWizardsList();
+var setupWizards = function () {
+  var userDialog = document.querySelector('.setup');
+  userDialog.classList.remove('hidden');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
+};
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+setupWizards();
+renderWizardsList();
