@@ -7,13 +7,12 @@
 
   var openModal = function () {
     setupModal.classList.remove('hidden');
-
     document.addEventListener('keydown', onModalEscPress);
   };
 
   var closeModal = function () {
     setupModal.classList.add('hidden');
-
+    setupModal.removeAttribute('style');
     document.removeEventListener('keydown', onModalEscPress);
   };
 
